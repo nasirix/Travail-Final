@@ -1,0 +1,31 @@
+quadrats <- read.txt("~/Université/Session 2/Bio109/Cours2/Données/quadrats.csv", sep=";")
+View(quadrats)
+Matrice.etats<-matrix(nrow=nrow(quadrats),ncol=3)
+Matrice.etats[,c(1:2,3)]<-quadrats[,1:2]
+
+
+
+for(n in 1:nrow(Matrice.etats))  {
+  
+  if (sum(quadrats[n,c('abba','piru')])>0) {
+    
+    if(sum(quadrats[n,c('acsa','acpe','beal','fagr')])>0) {
+      Matrice.etats[n,3] = "Mixte"
+    }      
+    
+    else {
+      Matrice.etats[n,3]= "Boréal"
+    }
+  }
+  
+  else if(sum(quadrats[n,c('acsa','acpe','beal','fagr')])>0) {
+    Matrice.etats[n,3]= "Tempéré"
+  }
+  
+  else {
+    Matrice.etats[n,3]= "R"
+  }
+}
+n=n+1
+RETURN(Matrice.etats)
+}
