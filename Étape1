@@ -1,29 +1,32 @@
-quadrats <- read.txt("~/Université/Session 2/Bio109/Cours2/Données/quadrats.csv", sep=";")
+quadrats <- read.csv("C:/Users/natha/OneDrive/Bureau/quadrats.txt", sep=";")
 View(quadrats)
-Matrice.etats<-matrix(nrow=nrow(quadrats),ncol=3)
-Matrice.etats[,c(1:2,3)]<-quadrats[,1:2]
+etats_0<-matrix(nrow=nrow(quadrats),ncol=3)
+colnames(etats_0)=c('bor.x','bor.y','états')
+etats_0[,1]<-quadrats$borx
+etats_0[,2]<-quadrats$bory
 
 
 
-for(n in 1:nrow(Matrice.etats))  {
+
+for(n in 1:nrow(etats_0))  {
   
   if (sum(quadrats[n,c('abba','piru')])>0) {
     
     if(sum(quadrats[n,c('acsa','acpe','beal','fagr')])>0) {
-      Matrice.etats[n,3] = "Mixte"
+      etats_0[n,3] = "M"
     }      
     
     else {
-      Matrice.etats[n,3]= "Boréal"
+      etats_0[n,3]= "B"
     }
   }
   
   else if(sum(quadrats[n,c('acsa','acpe','beal','fagr')])>0) {
-    Matrice.etats[n,3]= "Tempéré"
+    etats_0[n,3]= "T"
   }
   
   else {
-    Matrice.etats[n,3]= "R"
+    etats_0[n,3]= "R"
   }
 }
 n=n+1
