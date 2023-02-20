@@ -1,0 +1,43 @@
+matrice_transitions<-read.table("C:/Users/natha/OneDrive/Bureau/matrice_transitions.txt", sep=";")
+View(matrice_transitions)
+Proba_trans<-read.table("C:/Users/natha/OneDrive/Bureau/matrice_transitions.txt", quote="\"", comment.char="")
+View(Proba_trans)
+source('C:\\Users\\natha\\OneDrive\\Documents\\Université\\Session 2\\Bio109\\Abondance.R')
+
+lgt.df=nrow(etats_0)
+X<-etats_0[n,1]
+Y<-etats_0[n,2]
+
+
+tirage_t1 <- FUNCTION(etats_t1, Proba_trans[i,]) { 
+  RES= rmultinom(n=1, size=1, prob=Proba_trans[i,])
+  etats_t1[which(res==1)]
+}
+etatsxy= FUNCTION (x,y) {
+  for( n in 1:lgt.df) {
+    if(x==X & y==Y) {
+      etats=etats_0[n,3]
+      IF(etats=='B'){
+         i=1
+        resultats=tirage_t1(etats_t1,Prob_trans[i,])
+      }
+      ELSE{ 
+        IF( etats=='M') {
+           i=2
+          resultats=tirage_t1(etats_t1,Prob_trans[i,])
+        }
+        ELSE{ 
+          IF(etats=='T'){
+             i=3
+            resultats=tirage_t1(etats_t1,Prob_trans[i,])
+          }
+          ELSE{
+             i=4
+            resultats=tirage_t1(etats_t1,Prob_trans[i,])
+          }
+        }
+      }
+      etats_0[n,3]=resultats
+    }
+  }
+}  
