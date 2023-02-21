@@ -1,60 +1,58 @@
-matrice_transitions<-read.table("C:/Users/natha/OneDrive/Bureau/matrice_transitions.txt", sep=";")
-View(matrice_transitions)
-Proba_trans<-read.("C:/Users/natha/OneDrive/Bureau/matrice_transitions.txt", quote="\"", comment.char="")
-View(Proba_trans)
-as.matrix(Proba_trans)
+
+Prob_trans<-read.table("C:/Users/natha/OneDrive/Bureau/matrice_transitions.txt", quote="\"", comment.char="")
+
+
 source('C:\\Users\\natha\\OneDrive\\Documents\\Université\\Session 2\\Bio109\\Abondance.R')
 
-
+col.etats<-etats_0[,3]
 lgt.df=nrow(etats_0)
-Nom.etats=c("B", "M", "T", "R")
-Prob_trans=matrice_transitions
-B_t0=Prob_trans[1,]
-M_t0=Prob_trans[2,]
-T_t0=Prob_trans[3,]
-R_t0=Prob_trans[4,]
-etats_t1=etats_0
 
-
-
-tirage_t1 <- function(Nom.etats, Prob_trans) { 
+tirage_t1 <- function(Nom.etats, Prob_trans) {
+  Nom.etats=c("B", "M", "T", "R")
   res= rmultinom(n=1, size=1, prob=Prob_trans)
   Nom.etats[which(res==1)]
 }
-etatsxy= function(x,y) {
+etats_1_Temps= function(lgt.df,col.etats_0) {
+  lgt.df=nrow(etats_0)
+  etats_t1=c()
+  col.etats_0<-etats_0[,3]
+  B_t0=Prob_trans[1,]
+  M_t0=Prob_trans[2,]
+  T_t0=Prob_trans[3,]
+  R_t0=Prob_trans[4,]
+  n=1
   for(n in 1:lgt.df) {
-    if(x==etats_0[n,1] & y==etats_0[n,2]) {
-      etats=etats_0[n,3]
+    
+      etats=col.etats[n]
       if(etats=='B'){
-        i=1
-        resultats=tirage_t1(Nom.etats,Prob_trans=B_t0)
+        
+        resultats_pige=tirage_t1(Nom.etats,Prob_trans=B_t0)
       }
       else{ 
         if( etats=='M') {
-          i=2
-          resultats=tirage_t1(Nom.etats,Prob_trans=M_t0)
+          
+          resultats_pige=tirage_t1(Nom.etats,Prob_trans=M_t0)
         }
         
         else{ 
           if(etats=='T'){
-            i=3
-            resultats=tirage_t1(Nom.etats,Prob_trans=T_t0)
+            
+            resultats_pige=tirage_t1(Nom.etats,Prob_trans=T_t0)
           }
           
           else{
-            i=4
-            resultats=tirage_t1(Nom.etats,Prob_trans=R_t0)
+           
+            resultats_pige=tirage_t1(Nom.etats,Prob_trans=R_t0)
           }
         }
-        etats_t1[n,3]=resultats
-        return(resultats)
+        etats_t1[n]=resultats_pige
+        
       }
-    }
-    else{}
-    
+    n=n+1
   }
   return(etats_t1)
 }
-  
-   
+
+
+
 
