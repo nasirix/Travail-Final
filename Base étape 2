@@ -16,7 +16,9 @@ tirage_t1<- function(Nom.etats, Proba_trans) {
   res= rmultinom(n=1, size=1, prob=Proba_trans[i,])
   Nom.etats[which(res==1)]
 }
-
+x<-0
+y<-0
+n=1
 etatsxy= function (x,y) {
   for( n in 1:lgt.df) {
     if(x==X & y==Y) {
@@ -42,9 +44,7 @@ etatsxy= function (x,y) {
         }
       }
       etats_t1[n,3]=resultats
-  x<-0
-y<-0
-n=1
+  
 
 else{
   n=n+1
