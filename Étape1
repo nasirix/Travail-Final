@@ -21,14 +21,12 @@ for(n in 1:nrow(etats_0))  {
     }
   }
   
-  else if(sum(quadrats[n,c('acsa','acpe','beal','fagr')])>0) {
+  else {
+    if(sum(quadrats[n,c('acsa','acpe','beal','fagr')])>0) {
     etats_0[n,3]= "T"
   }
   
-  else {
+    else {
     etats_0[n,3]= "R"
   }
-}
-n=n+1
-RETURN(Matrice.etats)
 }
