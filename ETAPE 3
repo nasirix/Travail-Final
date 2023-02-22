@@ -1,0 +1,37 @@
+Fonction_evo= function(nboucle,etats_0) {
+  for(N in 0:nboucle) {
+    if(N==0) { 
+      Mat.compo = matrix(nrow=nboucle+1,ncol=4)
+      colnames(Mat.compo) = Nom.etats
+      table_t0=table(etats_0[,3])
+      prop.val=prop.table(table_t0)
+      Mat.compo[N+1,1]= prop.val["B"]
+      Mat.compo[N+1,2]= prop.val["M"]
+      Mat.compo[N+1,3]= prop.val["T"]
+      if( (table_t0["R"]) %in% Nom.etats==TRUE) {
+        Mat.compo[N+1,4]=prop.val["R"]
+      }
+      else{
+        Mat.compo[N+1,4]=0
+      }
+    }
+    else{
+      etats_t1[,3]=etats_1_Temps(lgt.df, col.etats)
+      table_t1=table(etats_t1[,3])
+      prop.val=prop.table(table_t1)
+      Mat.compo[N+1,1]= prop.val["B"]
+      Mat.compo[N+1,2]= prop.val["M"]
+      Mat.compo[N+1,3]= prop.val["T"]
+      if((table_t1["R"])%in% Nom.etats==TRUE) {
+        Mat.compo[N+1,4]=prop.val["R"]
+      }
+      else{
+        Mat.compo[N+1,4]=0
+      }
+      
+     }
+    
+  }
+return(Mat.compo)
+print(Mat.compo)
+}
