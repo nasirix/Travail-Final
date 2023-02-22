@@ -1,0 +1,16 @@
+
+M500<-c()
+q=1
+for(q in 1:500){
+M500[q]='M'
+
+q=q+1
+}
+Fonction_evo(15,M500)
+etats_0<-matrix(nrow=nrow(quadrats),ncol=3)
+colnames(etats_0)=c('bor.x','bor.y','états')
+etats_0[,1]<-quadrats$borx
+etats_0[,2]<-quadrats$bory
+etats_0[,3]<-M500
+View(etats_0)
+Test_Mixte<-Fonction_evo(15,etats_0)
