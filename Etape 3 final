@@ -1,3 +1,5 @@
+Source('Abondance.R')
+Source('Vraieétape2.R')
 Fonction_evo= function(nboucle,etats_0) {
   for(N in 0:nboucle) {
     if(N==0) { 
