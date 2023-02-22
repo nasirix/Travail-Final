@@ -1,0 +1,40 @@
+Prob_trans<-read.table("C:/Users/natha/OneDrive/Bureau/matrice_transitions.txt", quote="\"", comment.char="")
+
+tirage_t1 <- function(Nom.etats, Prob_trans) {
+  Nom.etats=c("B", "M", "T", "R")
+  res= rmultinom(n=1, size=1, prob=Prob_trans)
+  Nom.etats[which(res==1)]
+
+Hasard_xy<- function(x,y,mat.etats) {
+  
+  B_t0=Prob_trans[1,]
+  M_t0=Prob_trans[2,]
+  T_t0=Prob_trans[3,]
+  R_t0=Prob_trans[4,]
+  Ligne.Coord<-mat.etats[which(mat.etats[,1]==x&mat.etats[,2]==y),]
+  etats<-Ligne.Coord[3]
+  if(etats=='B'){
+    
+    resultats_Coord=tirage_t1(Nom.etats,Prob_trans=B_t0)
+  }
+  else{ 
+    if( etats=='M') {
+      
+      resultats_Coord=tirage_t1(Nom.etats,Prob_trans=M_t0)
+    }
+    
+    else{ 
+      if(etats=='T'){
+        
+        resultats_Coord=tirage_t1(Nom.etats,Prob_trans=T_t0)
+      }
+      
+      else{
+        
+        resultats_Coord=tirage_t1(Nom.etats,Prob_trans=R_t0)
+      }
+    }
+    return(resultats_Coord)
+    
+  }
+}  
