@@ -14,3 +14,22 @@ etats_0[,2]<-quadrats$bory
 etats_0[,3]<-M500
 View(etats_0)
 Test_Mixte<-Fonction_evo(15,etats_0)
+
+
+Partie 3
+Mat15Ans<-Fonction_evo(15,etats_0)
+y<-Mat15Ans[,3]
+length(x)
+length(y)
+x<-c(0:15)
+plot(5*x,y,ylab='ProportionForêtTempéré(%)',xlab='Bonds de temps')
+
+
+
+
+
+
+
+
+
+
